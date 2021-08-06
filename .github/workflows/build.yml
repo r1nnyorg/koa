@@ -6,6 +6,7 @@ jobs:
         - uses: actions/checkout@main
         - run: |
               docker login -u chaowenguo -p ${{secrets.DOCKER}}
+              npm install koa koa-body @koa/cors pg ioredis
               curl https://${GITHUB_REPOSITORY%/*}.github.io/common/package.json > package.json
               docker build -t chaowenguo/koa .
               curl https://${GITHUB_REPOSITORY%/*}.github.io/common/package.json > chat/package.json
