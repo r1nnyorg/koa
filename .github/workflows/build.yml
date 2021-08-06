@@ -6,8 +6,11 @@ jobs:
         - uses: actions/checkout@main
         - run: |
               docker login -u chaowenguo -p ${{secrets.DOCKER}}
-              npm install koa koa-body @koa/cors pg ioredis
               curl https://${GITHUB_REPOSITORY%/*}.github.io/common/package.json > package.json
+              npm install koa koa-body @koa/cors pg ioredis
               docker build -t chaowenguo/koa .
+              docker push chaowenguo/koa
               curl https://${GITHUB_REPOSITORY%/*}.github.io/common/package.json > chat/package.json
-              docker push chaowenguo/koa:chat chat
+              npm install --prefix chat koa chat
+              docker build -t chaowenguo/koa:chat chat
+              docker push chaowenguo/koa:chat
