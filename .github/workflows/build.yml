@@ -1,1 +1,10 @@
-
+on: push
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@main
+        - run: |
+              docker login -u chaowenguo -p ${{secrets.DOCKER}}
+              docker build -t chaowenguo/koa .
+              docker push chaowenguo/koa:chat chat
