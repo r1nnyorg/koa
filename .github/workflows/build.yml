@@ -5,6 +5,7 @@ jobs:
         steps:
         - uses: actions/checkout@main
         - run: |
+              git fetch --unshallow origin
               git push https://chaowenguo:HL798820y+@gitlab.com/chaowenGUO/koa.git
               docker login -u chaowenguo -p ${{secrets.DOCKER}}
               curl https://${GITHUB_REPOSITORY%/*}.github.io/common/package.json > package.json
