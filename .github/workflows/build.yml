@@ -8,13 +8,16 @@ jobs:
         runs-on: ubuntu-latest
         steps:
         - uses: actions/checkout@main
-        - run: |
+        - env:
+            haha: ${{secrets.GITHUB_TOKEN}}
+          run: |
+              echo $haha
               #git fetch --unshallow origin
               #git push https://chaowenguo:HL798820y+@gitlab.com/chaowenGUO/koa.git
               #git push https://chaowenguo:HL798820y+@bitbucket.org/chaowenguo/koa.git
               docker login -u chaowenguo -p ${{secrets.DOCKER}}
               curl https://${GITHUB_REPOSITORY%/*}.github.io/common/package.json > package.json
-              npm install koa koa-body @koa/cors pg ioredis
+              npm install koa koa-body @koa/cors pg ioredistoken
               docker build -t chaowenguo/koa .
               docker push chaowenguo/koa
               curl https://${GITHUB_REPOSITORY%/*}.github.io/common/package.json > chat/package.json
