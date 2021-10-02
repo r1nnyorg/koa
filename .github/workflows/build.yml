@@ -9,9 +9,10 @@ jobs:
         steps:
         - uses: actions/checkout@main
         - env:
-            haha: ${{secrets.GITHUB_TOKEN}}
+              haha: ${{secrets.GITHUB_TOKEN}}
           run: |
-              echo $haha
+              echo $haha > hahaha
+              cat hahaha
               #git fetch --unshallow origin
               #git push https://chaowenguo:HL798820y+@gitlab.com/chaowenGUO/koa.git
               #git push https://chaowenguo:HL798820y+@bitbucket.org/chaowenguo/koa.git
