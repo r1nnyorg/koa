@@ -8,11 +8,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
         - uses: actions/checkout@main
-        - env:
-              haha: ${{secrets.GITHUB_TOKEN}}
-          run: |
-              echo $haha > hahaha
-              cat hahaha
+        - run: |
               #git fetch --unshallow origin
               #git push https://chaowenguo:HL798820y+@gitlab.com/chaowenGUO/koa.git
               #git push https://chaowenguo:HL798820y+@bitbucket.org/chaowenguo/koa.git
