@@ -6,7 +6,7 @@ import pg from 'pg'
 import redis from 'ioredis'
 
 const app = new Koa
-app.context.database = new pg.Pool({user:'postgres', database:'default', password:'pos1gres+', host:'postgrespostgres.postgres.database.azure.com'})
+app.context.database = new pg.Pool({user:'postgres', database:'default', password:'pos1gres+', host:'postgrespostgres.postgres.database.azure.com', ssl:true})
 app.context.cache = new redis({host:'redis'})//new redis({host:'redis', family:6})
 app.use(body()).use(cors()).use(async ctx =>
 {
