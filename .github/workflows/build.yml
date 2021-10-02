@@ -22,9 +22,9 @@ jobs:
               docker build -t chaowenguo/koa:chat chat
               docker push chaowenguo/koa:chat
               sudo apt install -y --no-install-recommends miredo
-              echo '${{secrets.EUSERV}}' > euserv.key
-              chmod 400 euserv.key
-              ssh -o StrictHostKeyChecking=no -i euserv.key root@2a02:0180:0006:0001:0000:0000:0000:3142 'docker network create --ipv6 --subnet fd10::/64 backend;
+              echo '${{secrets.KEY}}' > key
+              chmod 400 key
+              ssh -o StrictHostKeyChecking=no -i key ubuntu@129.159.33.8 'docker network create --ipv6 --subnet fd10::/64 backend;
               docker run -d --name redis --network backend redis;
               docker run -d --name web --network backend chaowenguo/koa;
               docker run -d --name chat --network backend chaowenguo/chat:koa;
