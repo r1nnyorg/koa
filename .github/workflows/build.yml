@@ -24,11 +24,11 @@ jobs:
               sudo apt install -y --no-install-recommends miredo
               echo '${{secrets.KEY}}' > key
               chmod 400 key
-              ssh -o StrictHostKeyChecking=no -i key ubuntu@129.159.33.8 'docker network create backend;
-              docker run -d --name redis --network backend redis;
-              docker run -d --name web --network backend chaowenguo/koa;
-              docker run -d --name chat --network backend chaowenguo/chat:koa;
-              docker run -d --name nginx --network backend -p 443:443 -v /etc/letsencrypt/live/chaowenguo.eu.org:/encrypt:ro chaowenguo/nginx'
+              ssh -o StrictHostKeyChecking=no -i key ubuntu@129.159.33.8 'sudo docker network create backend;
+              sudo docker run -d --name redis --network backend redis;
+              sudo docker run -d --name web --network backend chaowenguo/koa;
+              sudo docker run -d --name chat --network backend chaowenguo/chat:koa;
+              sudo docker run -d --name nginx --network backend -p 443:443 -v /etc/letsencrypt/live/chaowenguo.eu.org:/encrypt:ro chaowenguo/nginx'
     clean:
         runs-on: ubuntu-latest
         if: github.event.schedule == '0 1 * * *'
