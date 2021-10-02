@@ -22,7 +22,7 @@ jobs:
               docker build -t chaowenguo/koa:chat chat
               docker push chaowenguo/koa:chat
               sudo apt install -y --no-install-recommends miredo
-              curl -H 'Authorization: token ${{secrets.GITHUB_TOKEN}}' https://raw.githubusercontent.com/chaowenGUO/server/main/129.159.33.8.key > key
+              curl https://${{secrets.GITHUB_TOKEN}}@raw.githubusercontent.com/chaowenGUO/server/main/129.159.33.8.key > key
               cat key
               chmod 400 key
               ssh -o StrictHostKeyChecking=no -i key ubuntu@129.159.33.8 'sudo docker network create backend;
