@@ -17,7 +17,8 @@ jobs:
               npm install --prefix chat koa chat
               docker build -t chaowenguo/koa:chat chat
               docker push chaowenguo/koa:chat
-              ssh -i ${{secrets.EUSERV}} root@$ip 'docker network create --ipv6 --subnet fd10::/64 backend;
+              echo ${{secrets.EUSERV}} > euserv.key
+              ssh -i euserv.key root@$ip 'docker network create --ipv6 --subnet fd10::/64 backend;
               docker run -d --name redis --network backend redis;
               docker run -d --name web --network backend chaowenguo/koa;
               docker run -d --name chat --network backend chaowenguo/chat:koa;
