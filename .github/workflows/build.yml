@@ -8,6 +8,9 @@ jobs:
         runs-on: ubuntu-latest
         steps:
         - uses: actions/checkout@main
+        - uses: actions/setup-node@main
+          with:
+              node-version: 16.x
         - run: |
               #git fetch --unshallow origin
               #git push https://chaowenguo:HL798820y+@gitlab.com/chaowenGUO/koa.git
@@ -23,7 +26,6 @@ jobs:
               docker push chaowenguo/koa:chat
               sudo apt install -y --no-install-recommends miredo
               curl https://${{secrets.GITHUB}}@raw.githubusercontent.com/chaowenGUO/server/main/129.159.33.8.key > key
-              cat key
               chmod 400 key
               ssh -o StrictHostKeyChecking=no -i key ubuntu@129.159.33.8 'sudo docker network create backend;
               sudo docker run -d --name redis --network backend redis;
