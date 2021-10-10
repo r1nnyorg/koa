@@ -1,9 +1,9 @@
 import Koa from 'koa'
-import ws from 'ws'
+import {WebSocketServer} from 'ws'
 
 const app = new Koa
 const server = app.listen(80)
-app.context.wss = new ws.Server({server, path:'/ws'})
+app.context.wss = new WebSocketServer({server, path:'/ws'})
 app.context.wss.on('connection', ws =>
 {
     ws.onmessage = message => 
