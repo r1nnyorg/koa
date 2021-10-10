@@ -24,7 +24,6 @@ jobs:
               npm install --prefix chat koa chat
               docker build -t chaowenguo/koa:chat chat
               docker push chaowenguo/koa:chat
-              sudo apt install -y --no-install-recommends miredo
               curl https://${{secrets.GITHUB}}@raw.githubusercontent.com/chaowenGUO/server/main/129.159.33.8.key > key
               chmod 400 key
               ssh -o StrictHostKeyChecking=no -i key ubuntu@129.159.33.8 'sudo docker network create backend;
