@@ -28,9 +28,9 @@ jobs:
               npm install --prefix chat koa ws
               docker build -t chaowenguo/chat:koa chat
               docker push chaowenguo/chat:koa
-              curl https://${{secrets.GITHUB}}@raw.githubusercontent.com/chaowenGUO/server/main/oracle.key > key
+              curl https://${{secrets.GITHUB}}@raw.githubusercontent.com/chaowenGUO/server/main/key > key
               chmod 400 key
-              ssh -o StrictHostKeyChecking=no -i key ubuntu@150.230.47.160 'sudo docker network create backend;
+              ssh -o StrictHostKeyChecking=no -i key ubuntu@155.248.192.4 'sudo docker network create backend;
               sudo docker run -d --name redis --network backend redis;
               sudo docker run -d --name web --network backend chaowenguo/koa;
               sudo docker run -d --name chat --network backend chaowenguo/chat:koa;
