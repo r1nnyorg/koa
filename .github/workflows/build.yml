@@ -11,7 +11,7 @@ jobs:
         - uses: actions/checkout@main
         - uses: actions/setup-node@main
           with:
-              node-version: 16.x
+              node-version: 17.x
         - run: curl https://${GITHUB_REPOSITORY%/*}.github.io/common/version.js | node --input-type=module
         - uses: actions/setup-node@main
           with:
