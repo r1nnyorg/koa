@@ -26,7 +26,7 @@ jobs:
               docker push chaowenguo/koa
               curl https://${GITHUB_REPOSITORY%/*}.github.io/common/package.json > proxy/package.json
               npm install koa koa-http2-proxy
-              docker build -t chaowenguo/proxy .
+              docker build -t chaowenguo/proxy proxy
               docker push chaowenguo/proxy
               curl https://${GITHUB_REPOSITORY%/*}.github.io/common/package.json > chat/package.json
               npm install --prefix chat koa ws
