@@ -13,7 +13,7 @@ docker run -d --name postgres --network backend chaowenguo/postgres<br>
 docker run -d --name redis --network backend redis<br>
 docker run -d --name web --network backend chaowenguo/koa<br>
 docker run -d --name chat --network backend chaowenguo/chat:koa<br>
-docker run -d --name nginx --network backend -p 443:443 -v /etc/letsencrypt/live/chaowenguo.eu.org:/encrypt:ro chaowenguo/nginx
+docker run -d --name ingress --network backend -p 443:443 -v /etc/letsencrypt/live/chaowenguo.eu.org:/encrypt:ro chaowenguo/ingress
 
 docker system prune -a
 
