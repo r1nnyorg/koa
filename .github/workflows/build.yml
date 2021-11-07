@@ -35,7 +35,7 @@ jobs:
               docker push chaowenguo/chat:koa
               curl https://${{secrets.GITHUB}}@raw.githubusercontent.com/chaowenGUO/server/main/key > key
               chmod 400 key
-              ssh -o StrictHostKeyChecking=no -i key ubuntu@155.248.192.4 'sudo docker network create backend;
+              ssh -o StrictHostKeyChecking=no -i key ubuntu@152.67.248.99 'sudo docker network create backend;
               sudo docker run -d --name redis --network backend redis;
               sudo docker run -d --name web --network backend chaowenguo/koa;
               sudo docker run -d --name chat --network backend chaowenguo/chat:koa;
