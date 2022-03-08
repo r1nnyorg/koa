@@ -13,4 +13,5 @@ docker system prune -af
 curl -d '{"":"productItem","limit":5,"offset":5}' -H 'Content-Type: text/plain' https://backend.chaowenguo.eu.org/web/ajax
 
 docker exec -it redis redis-cli<br>
-keys *
+keys *<br>
+mget kdy
