@@ -10,7 +10,7 @@ https://cnodejs.org/topic/5716137fe84805cd5410ea21
 
 curl -d '{"":"productItem","limit":5,"offset":5}' -H 'Content-Type: text/plain' https://backend.chaowenguo.eu.org/web/ajax
 
-docker exec -it redis redis-cli<br>
+docker exec -it redis redis-cli -c<br>
 redis-cli -h ip<br>
 keys *<br>
 mget kdy
