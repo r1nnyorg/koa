@@ -27,4 +27,4 @@ app.use(body()).use(cors()).use(async ctx =>
     app.context.wss.close()
     await app.context.database.end()
     server.close()
-})*/s
+})*/
