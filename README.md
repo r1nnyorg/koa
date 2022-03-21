@@ -14,7 +14,7 @@ curl -d '{"":"productItem","limit":"all","offset":0}' -H 'Content-Type: text/pla
 curl -d '{"":"productItem","limit":"all","offset":0}' -H 'Content-Type: text/plain' https://backend.chaowenguo.eu.org/web/ajax
 
 docker exec -it redis redis-cli -c<br>
-redis-cli -h ip<br>
+redis-cli -c -h ip -a <br>
 keys *<br>
 mget key<br>
 redis-cli --cluster create 40.118.245.62:6379 20.112.94.147:6379 155.248.198.227:6379 --cluster-yes
