@@ -7,7 +7,7 @@ import redis from 'ioredis'
 
 const app = new Koa
 app.context.database = new pg.Pool({user:'postgres', database:'default', password:'pos1gres+', host:'postgrespostgres.postgres.database.azure.com', ssl:true})
-app.context.cache = new redis.Cluster([{host:'redis'}], {redisOptions:{password:password:process.argv.at(2)}) //new redis({host:'redis'})  //new redis({host:'redis', family:6})
+app.context.cache = new redis.Cluster([{host:'redis'}], {redisOptions:{password:process.argv.at(2)}}) //new redis({host:'redis'})  //new redis({host:'redis', family:6})
 app.use(body()).use(cors()).use(async ctx =>
 {
     if (globalThis.Object.is(ctx.request.path, '/ajax'))
