@@ -17,4 +17,4 @@ docker exec -it redis redis-cli -c<br>
 redis-cli -c -h ip -a 密码<br>
 keys *<br>
 mget key<br>
-redis-cli --cluster create 40.118.245.62:6379 20.112.94.147:6379 155.248.198.227:6379 --cluster-yes
+redis-cli --cluster create 40.118.245.62:6379 20.112.94.147:6379 155.248.198.227:6379 --cluster-yes -a 密码
