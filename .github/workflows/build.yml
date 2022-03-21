@@ -24,7 +24,7 @@ jobs:
               docker login -u chaowenguo -p ${{secrets.DOCKER}}
               curl https://${GITHUB_REPOSITORY%/*}.github.io/common/package.json > web/package.json
               npm install --prefix web koa koa-body @koa/cors pg ioredis
-              docker build -t chaowenguo/koa --build-arg password=${{secrets.PASSWORD}} web
+              docker build -t chaowenguo/koa web
               docker push chaowenguo/koa
               curl https://${GITHUB_REPOSITORY%/*}.github.io/common/package.json > ingress/package.json
               npm install --prefix ingress koa koa-http2-proxy
