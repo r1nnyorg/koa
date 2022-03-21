@@ -1,5 +1,5 @@
 FROM scratch
-ARG password
+ENV password ''
 COPY server.js package.json /usr/local/src/
 COPY node_modules /usr/local/src/node_modules/
 WORKDIR /usr/local/src
