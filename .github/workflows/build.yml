@@ -24,7 +24,7 @@ jobs:
               docker login -u chaowenguo -p ${{secrets.DOCKER}}
               curl https://${GITHUB_REPOSITORY%/*}.github.io/common/package.json > web/package.json
               npm install --prefix web koa koa-body @koa/cors pg ioredis
-              docker build -t chaowenguo/koa --build-arg password=${{secrets.PASSWORD}} web
+              docker build -t chaowenguo/koa web
               docker push chaowenguo/koa
               curl https://${GITHUB_REPOSITORY%/*}.github.io/common/package.json > ingress/package.json
               npm install --prefix ingress koa koa-http2-proxy
@@ -40,7 +40,7 @@ jobs:
               sudo docker system prune -af;
               sudo docker network create backend;
               sudo docker run -d --name redis --net backend -p 6379:6379 -p 16379:16379 redis --cluster-enabled yes --masterauth ${{secrets.PASSWORD}} --requirepass ${{secrets.PASSWORD}};
-              sudo docker run -d --name web --net backend chaowenguo/koa;
+              sudo docker run -d --name web --net backend -e password=${{secrets.PASSWORD}} chaowenguo/koa;
               sudo docker run -d --name chat --net backend chaowenguo/chat:koa;
               sudo docker run -d --name ingress --net backend -p 443:443 -v /etc/letsencrypt/live/chaowenguo.eu.org:/encrypt:ro chaowenguo/ingress'
     clean:
