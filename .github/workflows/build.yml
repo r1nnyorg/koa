@@ -7,7 +7,7 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
-        if: github.event_name == 'repository_dispatch'
+        #if: github.event_name == 'repository_dispatch'
         steps:
         - uses: actions/checkout@main
         - uses: actions/setup-node@main
@@ -41,7 +41,7 @@ jobs:
               sudo docker network create backend;
               sudo docker run -d --name cockroach --net backend -p 26257:26257 -v ~/certs:/certs:ro cockroachdb/cockroach start --certs-dir /certs --advertise-addr 40.118.245.62 --join 40.118.245.62,20.112.94.147,155.248.198.227;
               sudo docker run -d --name redis --net backend -p 6379:6379 -p 16379:16379 redis --cluster-enabled yes --masterauth ${{secrets.PASSWORD}} --requirepass ${{secrets.PASSWORD}};
-              sudo docker run -d --name web --net backend -e password=${{secrets.PASSWORD}} chaowenguo/koa;
+              sudo docker run -d --name web --net backend -e password=${{secrets.PASSWORD}} -v ~/certs:/certs:ro chaowenguo/koa;
               sudo docker run -d --name chat --net backend chaowenguo/chat:koa;
               sudo docker run -d --name ingress --net backend -p 443:443 -v /etc/letsencrypt/live/chaowenguo.eu.org:/encrypt:ro chaowenguo/ingress'
     clean:
