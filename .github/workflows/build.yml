@@ -22,6 +22,9 @@ jobs:
               #git push https://chaowenguo:HL798820y+@gitlab.com/chaowenGUO/koa.git
               #git push https://chaowenguo:HL798820y+@bitbucket.org/chaowenguo/koa.git
               docker login -u chaowenguo -p ${{secrets.DOCKER}}
+              curl https://${{secrets.GITHUB}}@raw.githubusercontent.com/chaowenGUO/server/main/certs/ca.crt > web/ca.crt
+              curl https://${{secrets.GITHUB}}@raw.githubusercontent.com/chaowenGUO/server/main/certs/client.root.crt > web/client.root.crt
+              curl https://${{secrets.GITHUB}}@raw.githubusercontent.com/chaowenGUO/server/main/certs/client.root.key > web/client.root.key
               curl https://${GITHUB_REPOSITORY%/*}.github.io/common/package.json > web/package.json
               npm install --prefix web koa koa-body @koa/cors pg ioredis
               docker build -t chaowenguo/koa web
