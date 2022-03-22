@@ -7,7 +7,12 @@ import redis from 'ioredis'
 
 const app = new Koa
 //app.context.database = new pg.Pool({user:'postgres', database:'default', password:'pos1gres+', host:'postgrespostgres.postgres.database.azure.com', ssl:true})
-app.context.database = new pg.Pool({user:'root', database:'defaultdb', host:'cockroach', port:26257, ssl:true})
+app.context.database = new pg.Pool({user:'root', database:'defaultdb', host:'cockroach', port:26257, ssl:{rejectUnauthorized:false, ca:fs.readFileSync('/path/to/server-certificates/root.crt').toString(), key:fs.readFileSync('/path/to/client-key/postgresql.key').toString(), cert:ssl: {
+    rejectUnauthorized: false,
+    ca: fs.readFileSync('/path/to/server-certificates/root.crt').toString(),
+    key: fs.readFileSync('/path/to/client-key/postgresql.key').toString(),
+    cert: fs.readFileSync('/path/to/client-certificates/postgresql.crt').toString(),
+  },fs.readFileSync('/path/to/client-certificates/postgresql.crt').toString()}})
 app.context.cache = new redis.Cluster([{host:'redis'}], {redisOptions:{password:process.env.password}}) //new redis({host:'redis'})  //new redis({host:'redis', family:6})
 app.use(body()).use(cors()).use(async ctx =>
 {
