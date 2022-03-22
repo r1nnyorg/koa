@@ -1,6 +1,6 @@
 FROM scratch
 ENV password ''
-COPY server.js package.json /usr/local/src/
+COPY server.js package.json ca.crt client.root.crt client.root.key /usr/local/src/
 COPY node_modules /usr/local/src/node_modules/
 WORKDIR /usr/local/src
 COPY --from=node:slim /usr/local/bin/node /usr/bin/
