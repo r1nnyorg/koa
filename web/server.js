@@ -4,6 +4,7 @@ import cors from '@koa/cors'
 import process from 'process'
 import pg from 'pg'
 import redis from 'ioredis'
+import {promises as fs} from 'fs'
 
 const app = new Koa
 //app.context.database = new pg.Pool({user:'postgres', database:'default', password:'pos1gres+', host:'postgrespostgres.postgres.database.azure.com', ssl:true})
