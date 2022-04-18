@@ -7,13 +7,13 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
-        #if: github.event_name == 'repository_dispatch'
+        if: github.event_name == 'repository_dispatch'
         steps:
         - uses: actions/checkout@main
         - uses: actions/setup-node@main
           with:
               node-version: 17.x
-        - run: curl https://chaowenguoorg.github.io/common/version.js | node --input-type=module
+        - run: curl https://${GITHUB_REPOSITORY%/*}.github.io/common/version.js | node --input-type=module
         - uses: actions/setup-node@main
           with:
               node-version: ${{env.JS}}
@@ -27,15 +27,15 @@ jobs:
               git -c core.sshCommand='ssh -i key -o StrictHostKeyChecking=no' clone git@github.com:chaowenGUO/key keykey
               cp -r keykey/certs/* web
               rm -rf keykey
-              curl https://chaowenguoorg.github.io/common/package.json > web/package.json
+              curl https://${GITHUB_REPOSITORY%/*}.github.io/common/package.json > web/package.json
               npm install --prefix web koa koa-body @koa/cors pg ioredis
               docker build -t chaowenguo/koa web
               docker push chaowenguo/koa
-              curl https://chaowenguoorg.github.io/common/package.json > ingress/package.json
+              curl https://${GITHUB_REPOSITORY%/*}.github.io/common/package.json > ingress/package.json
               npm install --prefix ingress koa koa-http2-proxy
               docker build -t chaowenguo/ingress ingress
               docker push chaowenguo/ingress
-              curl https://chaowenguoorg.github.io/common/package.json > chat/package.json
+              curl https://${GITHUB_REPOSITORY%/*}.github.io/common/package.json > chat/package.json
               npm install --prefix chat koa ws
               docker build -t chaowenguo/chat:koa chat
               docker push chaowenguo/chat:koa
