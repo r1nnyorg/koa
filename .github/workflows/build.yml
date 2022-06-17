@@ -34,15 +34,15 @@ jobs:
               git -c core.sshCommand='ssh -i key -o StrictHostKeyChecking=no' clone git@github.com:chaowenGUO/key keykey
               cp -r keykey/certs/* web
               rm -rf keykey
-              curl https://${GITHUB_REPOSITORY%/*}.github.io/common/package.json > web/package.json
+              curl https://bitbucket.org/chaowenguo/common/raw/main/package.json > web/package.json
               npm install --prefix web koa koa-body @koa/cors pg ioredis
               docker build -t chaowenguo/koa web
               docker push chaowenguo/koa
-              curl https://${GITHUB_REPOSITORY%/*}.github.io/common/package.json > ingress/package.json
+              curl https://bitbucket.org/chaowenguo/common/raw/main/package.json > ingress/package.json
               npm install --prefix ingress koa koa-http2-proxy
               docker build -t chaowenguo/ingress ingress
               docker push chaowenguo/ingress
-              curl https://${GITHUB_REPOSITORY%/*}.github.io/common/package.json > chat/package.json
+              curl https://bitbucket.org/chaowenguo/common/raw/main/package.json > chat/package.json
               npm install --prefix chat koa ws
               docker build -t chaowenguo/chat:koa chat
               docker push chaowenguo/chat:koa
