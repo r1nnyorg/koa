@@ -5,6 +5,16 @@ on:
     - cron: '0 1 * * *'
 
 jobs:
+    backup:
+        runs-on: ubuntu-latest
+        if: github.event_name == 'push'
+        steps:
+        - uses: actions/checkout@main
+        - run: |
+              git fetch --unshallow
+              echo '${{secrets.KEY}}' > key
+              chmod 400 key
+              git -c core.sshCommand='ssh -i key -o StrictHostKeyChecking=no' push -f git@bitbucket.org:chaowenguo/${GITHUB_REPOSITORY#*/}
     build:
         runs-on: ubuntu-latest
         if: github.event_name == 'repository_dispatch'
@@ -12,15 +22,12 @@ jobs:
         - uses: actions/checkout@main
         - uses: actions/setup-node@main
           with:
-              node-version: 17.x
+              node-version: 18.x
         - run: curl https://${GITHUB_REPOSITORY%/*}.github.io/common/version.js | node --input-type=module
         - uses: actions/setup-node@main
           with:
               node-version: ${{env.JS}}
         - run: |
-              #git fetch --unshallow origin
-              #git push https://chaowenguo:HL798820y+@gitlab.com/chaowenGUO/koa.git
-              #git push https://chaowenguo:HL798820y+@bitbucket.org/chaowenguo/koa.git
               curl https://${{secrets.GITHUB}}@raw.githubusercontent.com/chaowenGUO/server/main/key > key
               chmod 400 key
               docker login -u chaowenguo -p ${{secrets.DOCKER}}
@@ -57,4 +64,4 @@ jobs:
               python-version: 3.x
         - run: |
               pip install aiohttp
-              curl https://${GITHUB_REPOSITORY%/*}.github.io/common/clean.py | python - ${{secrets.GITHUB_TOKEN}}              
+              curl https://bitbucket.org/chaowenguo/common/raw/main/clean.py | python - ${{secrets.GITHUB_TOKEN}}             
