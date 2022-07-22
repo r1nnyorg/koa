@@ -43,8 +43,7 @@ jobs:
               docker build -t chaowenguo/chat:koa chat
               docker push chaowenguo/chat:koa
               ips=`curl https://bitbucket.org/chaowenguo/server/raw/main/server.json | sed -e s/,/' '/g -e s/[][\"]//g`
-              echo ips
-              array=(ips)
+              array=($ips)
               ssh -o StrictHostKeyChecking=no -i key ubuntu@${array[0]} 'sudo docker network create backend
               #sudo docker run -d --name zookeeper -e ZOO_MY_ID=1 -e ZOO_SERVERS="server.1=0.0.0.0:2888:3888;2181 server.2=${ips[1]}:2888:3888;2181 server.3=${ips[2]}:2888:3888;2181" -p 2888:2888 -p 3888:3888 -p 2181:2181 zookeeper
               sudo docker run -d --name cockroach --net backend -p 26257:26257 -v ~/certs:/certs:ro -v /var/lib/cockroach/data:/cockroach/cockroach-data --restart=always cockroachdb/cockroach start --certs-dir /certs --advertise-addr `curl https://ifconfig.me` --join `echo $ips | sed s/' '/,/g`
