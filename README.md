@@ -17,3 +17,4 @@ docker exec -it redis redis-cli -c<br>
 redis-cli -c -h ip -a 密码<br>
 keys *<br>
 mget key
+1
